@@ -12,7 +12,9 @@
     # one("punctation, or something?", " ,?") → "punctuation__or_something_"
 
 def one(word, chars):
-    pass
+    for i in chars:
+        word = word.replace (i, '_')
+    return word
 
     # <QUESTION 2>
 
@@ -30,7 +32,17 @@ def one(word, chars):
     # There are 86,400 seconds in a day, and 3600 seconds in an hour
 
 def two(total_seconds):
-    pass
+    days = total_seconds //86400
+    total_seconds  %= 86400
+
+    hours = total_seconds //3600
+    total_seconds  %= 3600
+
+    mins = total_seconds //60
+    total_seconds  %= 60
+
+    secs = total_seconds
+    return (days, hours, mins, secs)
 
     # <QUESTION 3>
 
@@ -47,7 +59,9 @@ def two(total_seconds):
     # Dictionaries have methods that can be used to get their keys, values, or items
 
 def three(dictionary):
-    pass
+    swap = {value:key for key, value in dictionary.items()}
+    return swap
+
 
     # <QUESTION 4>
 
@@ -64,8 +78,11 @@ def three(dictionary):
     # four(-10) → 5
 
 def four(number):
-    pass
-
+    div = 1 
+    for i in range (1, abs(number)):
+        if number % i == 0:
+            div = i
+    return div
     # <QUESTION 5>
 
     # Given a string of characters, return the character with the lowest ASCII value
@@ -77,8 +94,8 @@ def four(number):
     # four('hello world!') → ' '
 
 def five(chars):
-    pass
-
+    chars = sorted(chars)
+    return chars[0]
     # <QUESTION 6>
 
     # Given a paragraph of text and an integer, break the paragraph into "pages" (a list of strings), where the
@@ -93,4 +110,13 @@ def five(chars):
     # six('hello world, how are you?', 20) → ['hello world, how are', 'you?']
     
 def six(paragraph, limit):
-    pass
+    words = paragraph.split()
+    pages = ['']
+
+    for word in words:
+        if len(word) +len(pages[-1]) + 1 > limit:
+            pages.append(word)
+        
+        else:
+            pages[-1] = (pages[-1] + ' ' + word).lstrip()
+    return pages
